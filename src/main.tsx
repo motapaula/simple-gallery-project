@@ -1,23 +1,28 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App.tsx'
-import './index.css'
-import Home from './pages/Home.tsx'
-import SearchBar from './components/SearchBar.tsx'
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import RandomPhoto from './components/RandomPhoto.tsx'
-import { createApi } from 'unsplash-js'
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App.tsx";
+import "./index.css";
 
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
+// Pages
+import Home from "./routes/Home";
 
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <App />,
+    children: [
+      {
+        path: "/",
+        element: <Home />,
+      },
+    ],
+  },
+]);
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
+ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
-
-    <Home />
-    <SearchBar />
-    <RandomPhoto />
-
-
-  </React.StrictMode>,
+    <RouterProvider router={router} />
+  </React.StrictMode>
 );
